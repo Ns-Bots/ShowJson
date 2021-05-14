@@ -4,12 +4,12 @@
   "keywords": [
     "telegram",
     "best",
-    "json"
+    "Json"
   ],
   "logo": "https://telegra.ph/file/b203e2d0485aed4ecb1de.jpg",
   "success_url": "https://telegram.dog/ShowJson_Nsbot",
-  "website": "https://github.com/Ns-AnoNymouS/TG-CONVERT-BOT",
-  "repository": "https://github.com/Ns-AnoNymouS/TG-CONVERT-BOT",
+  "website": "https://github.com/Ns-Bots/ShowJson",
+  "repository": "https://github.com/Ns-Bots/ShowJson",
   "env": {
     "WEBHOOK": {
       "description": "Setting this to ANYTHING will enable webhooks when in env mode",
@@ -19,12 +19,12 @@
       "description": "Your bot token, as a string.",
       "value": ""
     },
-    "OWNER_ID": {
-      "description": "Your telegram user id",
-      "value": ""
-    },
     "API_ID": {
       "description": "Get this value from https://my.telegram.org",
+      "value": ""
+    },
+    "OWNER_ID": {
+      "description": "give your telegram user id here",
       "value": ""
     },
     "API_HASH": {
