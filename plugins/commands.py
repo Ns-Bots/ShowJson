@@ -74,7 +74,11 @@ async def inline_json(c, m):
         switch_pm_text="Something went wrong"
         pass
 
-    os.remove(f'Your json file {m.from_user.first_name}.json')
+    try: # if file exist try to delete..
+       os.remove(f'Your json file {m.from_user.first_name}.json')
+    except: # else continue
+        pass
+
     await m.answer(
         results=[],
         switch_pm_text=switch_pm_text,
