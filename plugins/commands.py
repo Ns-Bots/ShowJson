@@ -63,7 +63,6 @@ async def inline_json(c, m):
             with open(f'Your json file {m.from_user.first_name}.json', 'w') as f:
                 f.write(text)
             await c.send_document(chat_id=m.from_user.id, file_name=f'Your json file {m.from_user.first_name}.json')
-            os.remove(f'Your json file {m.from_user.first_name}.json')
     except UserIsBlocked:
         switch_pm_text="You have Blocked the bot,Unblock it "
         pass
@@ -75,6 +74,7 @@ async def inline_json(c, m):
         switch_pm_text="Something went wrong"
         pass
 
+    os.remove(f'Your json file {m.from_user.first_name}.json')
     await m.answer(
         results=[],
         switch_pm_text=switch_pm_text,
