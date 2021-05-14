@@ -2,6 +2,7 @@ import os
 from config import Config
 from pyrogram import Client, filters
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
+from pyrogram.errors import UserIsBlocked, PeerIdInvalid
 
 @Client.on_message(filters.command('start'))
 async def start(c, m):
@@ -44,17 +45,40 @@ async def show_json(c, m):
 
 @Client.on_inline_query()
 async def inline_json(c, m):
+    if m.query == "":
+      await m.answer(
+        results=[],
+        switch_pm_text="Type something to get json",
+        switch_pm_parameter="start",
+        cache_time=0
+    )
+      return
+
     text = f'`{m}`'
-    if len(text) <= 4096:
-        await c.send_message(chat_id=m.from_user.id, text=text)
-    else:
-        with open(f'Your json file {m.from_user.first_name}.json', 'w') as f:
-            f.write(text)
-        await c.send_document(chat_id=m.from_user.id, file_name=f'Your json file {m.from_user.first_name}.json')
-        os.remove(f'Your json file {m.from_user.first_name}.json')
+    switch_pm_text = f"Hey i sent the json in PM 😉"
+    try:
+        if len(text) <= 4096:
+            await c.send_message(chat_id=m.from_user.id, text=text)
+        else:
+            with open(f'Your json file {m.from_user.first_name}.json', 'w') as f:
+                f.write(text)
+            await c.send_document(chat_id=m.from_user.id, file_name=f'Your json file {m.from_user.first_name}.json')
+            os.remove(f'Your json file {m.from_user.first_name}.json')
+    except UserIsBlocked:
+        switch_pm_text="You have Blocked the bot,Unblock it "
+        pass
+    except PeerIdInvalid:
+        switch_pm_text="Please start the bot once in pm and try again"
+        pass
+    except Exception as e:
+        print(e)
+        switch_pm_text="Something went wrong"
+        pass
 
     await m.answer(
         results=[],
-        switch_pm_text=f"Hey i sent the json in PM 😉",
+        switch_pm_text=switch_pm_text,
         switch_pm_parameter="start",
+        cache_time=0
     )
+
