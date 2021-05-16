@@ -7,12 +7,12 @@ from pyrogram.errors import UserIsBlocked, PeerIdInvalid
 @Client.on_message(filters.command('start'))
 async def start(c, m):
     owner = await c.get_users(int(Config.OWNER_ID))
-    owner_username = owner.username if owner.username else 'Ns_bot_updates'
+    owner_username = owner.username if owner.username else 'disneygrou'
 
     # start text
     text = f"""Hey! {m.from_user.mention(style='md')},
 
-💡 ** I am Telegram ShowJson Bot**
+💡 ** I am Telegram disney team showJson Bot**
 
 `Get the json for the text, media, etc.`
 
@@ -22,7 +22,7 @@ async def start(c, m):
     # Buttons
     buttons = [
         [
-            InlineKeyboardButton('My Father 👨‍✈️', url=f"https://t.me/{owner_username}")
+            InlineKeyboardButton('My Father 👨‍✈️', url=f"https://t.me/{doreamonfans1}")
         ]
     ]
     await m.reply_text(
